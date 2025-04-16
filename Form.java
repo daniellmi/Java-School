@@ -22,13 +22,13 @@ public class Form extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         this.setResizable(false);
 
-        Conexão conexao = new Conexão();
+        Connection connection_c = new Connection();
 
         try {
             Class.forName("org.postgresql.Driver");
 
-            this.connection = DriverManager.getConnection(conexao.getUrl(),
-                    conexao.getUsername(), conexao.getPassword());
+            this.connection = DriverManager.getConnection(connection_c.getUrl(),
+                    connection_c.getUsername(), connection_c.getPassword());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +53,7 @@ public class Form extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setText("Procurar");
+        jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -72,9 +72,9 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Name:");
 
-        jLabel2.setText("Turma:");
+        jLabel2.setText("Class:");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -82,7 +82,7 @@ public class Form extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setText("Limpar");
+        jButton2.setText("Clean");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -90,7 +90,7 @@ public class Form extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jLabel3.setText("Busca por Aluno");
+        jLabel3.setText("Students");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,7 +182,7 @@ public class Form extends javax.swing.JFrame {
             // first letter in the sentence in uppercase 
             char first = Character.toUpperCase(value1.charAt(0));
 
-            String queryValue = "SELECT * FROM alunos_info WHERE nome_completo LIKE ? AND turma = ?";
+            String queryValue = "SELECT * FROM alunos_info WHERE name LIKE ? AND class = ?";
 
             PreparedStatement statement = this.connection.prepareStatement(queryValue);
 
@@ -193,9 +193,9 @@ public class Form extends javax.swing.JFrame {
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                jTextArea1.append(result.getString("nome_completo") + "\n"
-                        + "Autorização para saída: " + result.getString("autorizacao_saida")
-                        + "\n Responsável: " + result.getString("nome_responsavel") + "\n");
+                jTextArea1.append(result.getString("name") + "\n"
+                        + "Exit Authorization: " + result.getString("authorization")
+                        + "\n Parents: " + result.getString("parents") + "\n");
             }
 
         } catch (SQLException e) {
