@@ -19,10 +19,10 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         jButton1.setEnabled(false);
-        Conexão conexao = new Conexão();
+        Conexão connection_c = new Connection();
         
         try {
-            connection = DriverManager.getConnection(conexao.getUrl(), conexao.getUsername(), conexao.getPassword());
+            connection = DriverManager.getConnection(connection_c.getUrl(), connection_c.getUsername(), connection_c.getPassword());
             System.out.println("connected");
 
         } catch (Exception e) {
@@ -65,9 +65,9 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("DejaVu Serif Condensed", 0, 24)); // NOI18N
         jLabel1.setText("Login");
 
-        jLabel2.setText("Nome");
+        jLabel2.setText("Name");
 
-        jLabel3.setText("Senha");
+        jLabel3.setText("Password");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,14 +147,14 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginFunction() {
         try {
-            String nome = jTextField1.getText().trim();
+            String name = jTextField1.getText().trim();
             char[] LoginPasswordChar = jPasswordField1.getPassword();
             String Loginpassword = new String(LoginPasswordChar);
 
-            String sql = "SELECT * FROM admins WHERE nome = ? AND password = ?";
+            String sql = "SELECT * FROM admins WHERE name = ? AND password = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setString(1, nome);
+            statement.setString(1, name);
             statement.setString(2, Loginpassword);
 
             ResultSet result = statement.executeQuery();
@@ -163,7 +163,7 @@ public class Login extends javax.swing.JFrame {
                 new Form().setVisible(true);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Login incorreto");
+                JOptionPane.showMessageDialog(null, "Incorrect login");
             }
 
         } catch (SQLException e) {
