@@ -9,15 +9,15 @@ package com.mycompany.escola;
  * @author daniel
  */
 import java.sql.*;
-public class Conexão {
+public class Connection {
     private String url;
     private String username;
     private String password;
     
-    public Conexão() {
+    public Connection() {
         url = "jdbc:postgresql://localhost:5432/escola";
         username = "postgres";
-        password = "123";
+        password = "*****";
     }
     
      public void setUrl(String u) {
