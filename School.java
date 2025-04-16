@@ -7,7 +7,7 @@ package com.mycompany.escola;
  *
  * @author daniel
  */
-public class Escola {
+public class School {
 
     public static void main(String[] args) {
         Login login = new Login();
